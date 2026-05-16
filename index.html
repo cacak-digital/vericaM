@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Salon Verica M,V — Premium frizerski salon u Čačku. Sinđelićeva 47. Rezervišite termin: 060 4520111">
+<title>Salon Verica M,V — Čačak</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold:#C9A96E;--gold-light:#E8D5B0;--gold-pale:#F0E5CC;
+  --dark:#0D0B08;--dark-mid:#131108;--dark-surface:#1A1710;
+  --dark-card:#201D14;--dark-line:#2C2819;
+  --text-body:#C4B89A;--text-muted:#7A6F58;--white:#F8F3EA;
+  --nav-h:72px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 10px)}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+button{cursor:pointer;border:none;background:none;font:inherit}
+body{background:var(--dark);color:var(--text-body);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body.loading{overflow:hidden}
+#pageLoader{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:var(--dark);color:var(--gold);font-family:'Cormorant Garamond',serif;text-align:center}
+#pageLoader > div{display:flex;flex-direction:column;align-items:center;gap:14px}
+.loader-scissors{position:relative;width:72px;height:72px;display:flex;align-items:center;justify-content:center}
+.loader-scissors::before,.loader-scissors::after{content:'';position:absolute;width:10px;height:56px;background:var(--gold);border-radius:8px;top:8px;left:50%;transform-origin:50% 8px}
+.loader-scissors::before{transform:rotate(28deg);animation:bladeOpen 1.2s ease-in-out infinite}
+.loader-scissors::after{transform:rotate(-28deg);animation:bladeClose 1.2s ease-in-out infinite}
+.loader-handle{position:absolute;width:16px;height:16px;border:3px solid var(--gold);border-radius:50%;top:46%;transform:translate(-50%,-50%);left:50%}
+.loader-text{font-size:.95rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-light)}
+.loader-hidden{opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s}
+@keyframes bladeOpen{0%,100%{transform:rotate(28deg)}50%{transform:rotate(18deg)}}
+@keyframes bladeClose{0%,100%{transform:rotate(-28deg)}50%{transform:rotate(-18deg)}}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--dark)}
+::-webkit-scrollbar-thumb{background:var(--dark-line);border-radius:2px}
+@media(min-width:768px){
+  body{cursor:none}
+  .cursor-dot,.cursor-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);border-radius:50%;transition:opacity .3s}
+  .cursor-dot{width:6px;height:6px;background:var(--gold)}
+  .cursor-ring{width:36px;height:36px;border:1px solid rgba(201,169,110,.4);transition:transform .12s ease,width .3s,height .3s,opacity .3s}
+}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;width:100%;z-index:100;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(24px,5vw,64px);transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
+nav.scrolled{background:rgba(13,11,8,.92);backdrop-filter:blur(18px);border-color:var(--dark-line)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:500;letter-spacing:.15em;color:var(--gold-light);text-transform:uppercase}
+.nav-logo span{color:var(--text-muted);font-weight:300}
+.nav-links{display:flex;gap:40px}
+.nav-links a{font-size:.85rem;letter-spacing:.18em;text-transform:uppercase;color:var(--white);font-weight:400;transition:color .25s;position:relative;text-shadow:0 0 4px rgba(0,0,0,.4)}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s}
+.nav-links a:hover{color:var(--gold-light)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--dark);background:var(--gold);padding:10px 22px;transition:background .25s}
+.nav-cta:hover{background:var(--gold-light)}
+.hamburger{display:none;flex-direction:column;gap:5px;padding:4px}
+.hamburger span{display:block;width:24px;height:1px;background:var(--gold-light);transition:transform .3s,opacity .3s}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:99;background:var(--dark-mid);flex-direction:column;align-items:center;justify-content:center;gap:36px;opacity:0;transition:opacity .35s}
+.mobile-menu.open{display:flex;opacity:1}
+.mobile-menu a{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:300;font-style:italic;color:var(--gold-light);letter-spacing:.06em;transition:color .2s}
+.mobile-menu a:hover{color:var(--gold)}
+.mobile-menu .mm-cta{font-family:'Jost',sans-serif;font-style:normal;font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;color:var(--dark);background:var(--gold);padding:14px 36px;margin-top:16px}
+@media(max-width:767px){.nav-links,.nav-cta{display:none}.hamburger{display:flex}.nav{padding:0 18px}.nav-logo{font-size:1rem}.hamburger{gap:4px}.mobile-menu{gap:24px}.mobile-menu a{font-size:2rem}.mobile-menu .mm-cta{padding:12px 28px}}
+
+/* HERO */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 clamp(16px,5vw,40px) clamp(24px,5vw,32px);position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg-img{width:100%;height:100%;position:relative;overflow:hidden;background:#0a1010}
+.hero-bg-img img{width:100%;height:100%;object-fit:cover;object-position:center 55%;display:block}
+.hero-bg-img::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 120px,rgba(201,169,110,.018) 120px,rgba(201,169,110,.018) 121px)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,11,8,1) 0%,rgba(13,11,8,.5) 50%,rgba(13,11,8,.15) 100%)}
+.hero-content{position:relative;z-index:2;max-width:100%}
+.hero-eyebrow{margin-bottom:18px;gap:10px}
+.hero-title{font-size:clamp(2.5rem,10vw,5rem);margin-bottom:18px;text-shadow:0 10px 24px rgba(0,0,0,.35)}
+.hero-sub{font-size:1rem;max-width:100%}
+.hero-actions{flex-direction:column;align-items:start;gap:16px;margin-top:32px}
+.btn-primary{width:100%;text-align:center;padding:14px 0}
+.btn-secondary{width:100%;justify-content:center;padding:14px 0;border-bottom:none;border-top:1px solid rgba(201,169,110,.2)}
+.scroll-indicator{display:none}}
+
+@media(max-width:767px){.about-grid{grid-template-columns:1fr}.about-people{grid-template-columns:1fr;justify-items:center}.person-card{padding:12px;align-items:center;text-align:center;width:min(100%,220px);max-width:220px;margin:0 auto;gap:10px}.person-img{width:100%;max-width:180px;aspect-ratio:1/1;margin:0 auto}.person-img img{width:100%;height:100%;object-fit:cover}.person-name{font-size:1.05rem}.person-role{font-size:.65rem}.person-bio{font-size:.88rem;line-height:1.7;margin:0}.about-text{padding-top:20px}.about-stats{flex-direction:column;gap:18px}.stat-num{font-size:2.2rem}}
+@media(max-width:520px){.person-card{width:min(100%,200px);max-width:200px;padding:10px;gap:8px}.person-img{max-width:160px}.person-name{font-size:1rem}.person-bio{font-size:.85rem;line-height:1.6}}
+.hero-content{position:relative;z-index:2;max-width:900px}
+.hero-eyebrow{font-size:.7rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;opacity:0;transform:translateY(20px);animation:fadeUp .8s ease .3s forwards;display:flex;align-items:center;gap:16px}
+.hero-eyebrow::before{content:'';display:block;width:40px;height:1px;background:var(--gold);opacity:.6}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3.2rem,9vw,7.5rem);font-weight:400;line-height:1.05;letter-spacing:0;color:#ffffff;text-shadow:0 12px 30px rgba(0,0,0,.35);margin-bottom:28px}
+.hero-title em{font-style:italic;color:var(--gold-light)}
+.hero-title .line{display:block;overflow:hidden}
+.hero-title .line span{display:block;opacity:0;transform:translateY(110%)}
+.hero-title .line:nth-child(1) span{animation:slideUp .9s cubic-bezier(.22,.68,0,1.2) .4s forwards}
+.hero-title .line:nth-child(2) span{animation:slideUp .9s cubic-bezier(.22,.68,0,1.2) .55s forwards}
+.hero-title .line:nth-child(3) span{animation:slideUp .9s cubic-bezier(.22,.68,0,1.2) .7s forwards}
+.hero-sub{font-size:clamp(.85rem,2vw,1rem);letter-spacing:.06em;color:var(--text-body);max-width:420px;line-height:1.8;opacity:0;transform:translateY(16px);animation:fadeUp .8s ease .95s forwards}
+.hero-actions{display:flex;gap:20px;flex-wrap:wrap;margin-top:44px;opacity:0;transform:translateY(16px);animation:fadeUp .8s ease 1.1s forwards}
+.btn-primary{display:inline-block;background:var(--gold);color:var(--dark);padding:15px 36px;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;transition:background .25s,transform .2s}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-1px)}
+.btn-secondary{display:inline-flex;align-items:center;gap:10px;color:var(--gold-light);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;padding:15px 0;border-bottom:1px solid rgba(201,169,110,.3);transition:border-color .25s,gap .25s}
+.btn-secondary:hover{border-color:var(--gold);gap:16px}
+.scroll-indicator{position:absolute;right:clamp(24px,5vw,64px);bottom:clamp(48px,8vh,96px);z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp .8s ease 1.4s forwards}
+.scroll-indicator span{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--text-muted);writing-mode:vertical-rl;transform:rotate(180deg)}
+.scroll-line{width:1px;height:60px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollPulse 2s ease-in-out infinite 1.4s}
+
+/* SECTION SHARED */
+section{position:relative;z-index:2;scroll-margin-top:100px}
+.section-inner{max-width:1160px;margin:0 auto;padding:clamp(80px,12vh,140px) clamp(24px,5vw,64px)}
+.section-label{font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:16px}
+.section-label::before{content:'';display:block;width:30px;height:1px;background:var(--gold);opacity:.5}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:300;line-height:1.1;color:var(--white);margin-bottom:20px}
+.section-title em{font-style:italic;color:var(--gold-light)}
+.gold-divider{width:60px;height:1px;background:linear-gradient(to right,var(--gold),transparent);margin:32px 0}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:none}
+.reveal-delay-1{transition-delay:.1s}.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}.reveal-delay-4{transition-delay:.4s}
+.reveal-delay-5{transition-delay:.5s}
+
+/* STRIP */
+.strip{border-top:1px solid var(--dark-line);border-bottom:1px solid var(--dark-line);background:var(--dark-surface);overflow:hidden;padding:18px 0}
+.strip-track{display:flex;animation:marquee 26s linear infinite;width:max-content}
+.strip-item{display:flex;align-items:center;gap:24px;padding:0 40px;font-size:.63rem;letter-spacing:.35em;text-transform:uppercase;color:var(--text-muted);white-space:nowrap}
+.strip-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);opacity:.5}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,80px);align-items:center}
+.about-people{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.person-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);padding:24px;display:flex;flex-direction:column;gap:18px}
+.person-img{aspect-ratio:1/1;overflow:hidden;background:var(--dark-surface);border:1px solid rgba(255,255,255,.08)}
+.person-img img{width:100%;height:100%;object-fit:cover;display:block}
+.person-name{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--white);letter-spacing:.06em}
+.person-role{font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-light)}
+.person-bio{font-size:.95rem;line-height:1.8;color:var(--text-body)}
+.about-image-wrap{position:relative;aspect-ratio:3/4}
+.about-img-placeholder{width:100%;height:100%;background:var(--dark-surface);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;border:1px solid var(--dark-line)}
+.about-img-placeholder span{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--text-muted)}
+.img-icon{width:40px;height:40px;border:1px solid var(--dark-line);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:1.1rem}
+.about-image-wrap::after{content:'';position:absolute;bottom:-16px;right:-16px;width:60%;height:60%;border:1px solid rgba(201,169,110,.2);pointer-events:none}
+.about-text p{font-size:clamp(.9rem,1.8vw,1.05rem);line-height:1.9;color:var(--text-body);margin-bottom:20px}
+.about-text p strong{color:var(--gold-light);font-weight:400}
+.about-stats{display:flex;gap:40px;margin-top:44px;padding-top:36px;border-top:1px solid var(--dark-line)}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:var(--gold-light);line-height:1}
+.stat-label{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted);margin-top:6px}
+@media(max-width:767px){.about-grid{grid-template-columns:1fr}.about-people{grid-template-columns:1fr}.about-image-wrap{aspect-ratio:4/3}.about-image-wrap::after{display:none}}
+
+/* SERVICES */
+.services-bg{background:var(--dark-mid);border-top:1px solid var(--dark-line);border-bottom:1px solid var(--dark-line)}
+.services-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:64px;flex-wrap:wrap;gap:24px}
+.services-header p{max-width:320px;font-size:.9rem;line-height:1.8;color:var(--text-muted)}
+.cat-tabs{display:flex;margin-bottom:48px;border-bottom:1px solid var(--dark-line);overflow-x:auto;-webkit-overflow-scrolling:touch}
+.cat-tab{padding:14px 28px;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--text-muted);background:none;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .25s,border-color .25s;cursor:pointer;white-space:nowrap;flex-shrink:0}
+.cat-tab.active{color:var(--gold-light);border-color:var(--gold)}
+.cat-tab:hover{color:var(--gold-light)}
+.price-panel{display:none}
+.price-panel.active{display:block}
+.price-group{margin-bottom:52px}
+.price-group-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;font-style:italic;color:var(--gold);letter-spacing:.06em;margin-bottom:8px;padding-bottom:12px;border-bottom:1px solid var(--dark-line)}
+.price-item{display:flex;justify-content:space-between;align-items:baseline;padding:14px 0;border-bottom:1px solid rgba(44,40,25,.6);transition:background .2s;position:relative}
+.price-item::before{content:'';position:absolute;inset:0 -12px;background:rgba(201,169,110,.03);opacity:0;transition:opacity .2s}
+.price-item:hover::before{opacity:1}
+.price-name{font-size:clamp(.85rem,1.8vw,.95rem);color:var(--text-body);padding-right:20px;flex:1}
+.price-name small{display:block;font-size:.72rem;color:var(--text-muted);margin-top:3px;letter-spacing:.04em}
+.price-dots{flex:1;border-bottom:1px dotted rgba(122,111,88,.3);margin:0 12px 5px;min-width:20px}
+.price-val{font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,2.2vw,1.15rem);font-weight:400;color:var(--gold-light);white-space:nowrap;letter-spacing:.04em}
+.price-note{font-size:.7rem;color:var(--text-muted);margin-top:24px;padding:16px 20px;border-left:2px solid var(--dark-line);line-height:1.7}
+.price-cols{display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(40px,6vw,80px)}
+@media(max-width:767px){.price-cols{grid-template-columns:1fr}.cat-tab{padding:12px 16px;font-size:.62rem}}
+
+/* GALLERY */
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.gallery-item{position:relative;overflow:hidden;border:1px solid var(--dark-line);background:var(--dark-surface);min-height:240px;transition:transform .35s ease,box-shadow .35s ease}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.gallery-item:hover{transform:translateY(-2px);box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.gallery-item:hover img{transform:scale(1.08)}
+@media(max-width:767px){.gallery-grid{grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}.gallery-item{min-height:180px}}
+
+/* PRODUCTS */
+.products-section{text-align:center}
+.products-badge{display:inline-flex;flex-direction:column;align-items:center;gap:12px;border:1px solid var(--dark-line);padding:36px 56px;background:var(--dark-card);position:relative}
+.products-badge::before{content:'';position:absolute;top:-1px;left:30%;right:30%;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent)}
+.badge-label{font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:var(--text-muted)}
+.badge-name{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-light)}
+.badge-sub{font-size:.72rem;letter-spacing:.12em;color:var(--text-muted);max-width:260px;text-align:center;line-height:1.7}
+
+.brands-section{background:var(--dark-mid);border-top:1px solid var(--dark-line);border-bottom:1px solid var(--dark-line)}
+.brand-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-top:32px}
+.brand-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);padding:18px 14px;display:flex;align-items:center;justify-content:center;text-align:center;min-height:88px;transition:transform .25s,background .25s}
+.brand-card:hover{transform:translateY(-4px);background:rgba(255,255,255,.06)}
+.brand-card{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-weight:400;color:var(--white);letter-spacing:.04em;text-transform:none}
+@media(max-width:767px){.brand-grid{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}.brand-card{min-height:78px;padding:14px;font-size:.88rem}}
+/* CONTACT */
+.contact-bg{background:var(--dark-mid);border-top:1px solid var(--dark-line)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,8vw,100px);align-items:start}
+.contact-info-list{margin-top:40px}
+.contact-info-item{display:flex;gap:20px;align-items:flex-start;padding:24px 0;border-bottom:1px solid var(--dark-line)}
+.ci-icon{width:44px;height:44px;flex-shrink:0;border:1px solid var(--dark-line);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:1rem}
+.ci-label{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px}
+.ci-value{font-size:clamp(.9rem,2vw,1.05rem);color:var(--white);line-height:1.5}
+.ci-value a{color:var(--gold-light);transition:color .2s}
+.ci-value a:hover{color:var(--gold)}
+.map-placeholder{aspect-ratio:4/3;background:var(--dark-surface);border:1px solid var(--dark-line);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;position:relative;overflow:hidden}
+.map-placeholder::before{content:'';position:absolute;inset:0;background:linear-gradient(rgba(201,169,110,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(201,169,110,.04) 1px,transparent 1px);background-size:40px 40px}
+.map-pin{width:48px;height:48px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:1.3rem;position:relative;z-index:1;animation:mapPulse 2s ease-in-out infinite}
+.map-placeholder span{font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--text-muted);position:relative;z-index:1}
+.map-placeholder a{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid rgba(201,169,110,.3);padding-bottom:3px;position:relative;z-index:1;transition:border-color .2s}
+.map-placeholder a:hover{border-color:var(--gold)}
+.hours-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.hour-row{display:flex;justify-content:space-between;font-size:.82rem;padding:10px 14px;background:var(--dark-surface);border:1px solid var(--dark-line)}
+.hour-day{color:var(--text-muted);letter-spacing:.06em}.hour-time{color:var(--white);font-weight:400}
+.hour-row.today{border-color:rgba(201,169,110,.4)}.hour-row.today .hour-day{color:var(--gold)}
+@media(max-width:767px){.contact-grid{grid-template-columns:1fr}.hours-grid{grid-template-columns:1fr}}
+
+/* FOOTER */
+footer{background:var(--dark);border-top:1px solid var(--dark-line);padding:48px clamp(24px,5vw,64px);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-light)}
+.footer-copy{font-size:.65rem;letter-spacing:.12em;color:var(--text-muted)}
+.footer-social{display:flex;gap:16px}
+.footer-social a{width:38px;height:38px;border:1px solid var(--dark-line);display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:.8rem;transition:color .2s,border-color .2s;font-weight:500}
+.footer-social a:hover{color:var(--gold);border-color:var(--gold)}
+
+/* FLOAT CTA */
+.float-cta{position:fixed;bottom:24px;right:24px;z-index:50;display:none;background:var(--gold);color:var(--dark);padding:14px 24px;font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;box-shadow:0 8px 32px rgba(0,0,0,.5);transition:transform .2s,opacity .3s;opacity:0}
+.float-cta.visible{opacity:1}
+.float-cta:hover{transform:scale(1.03)}
+@media(max-width:767px){.float-cta{display:block}}
+
+/* KEYFRAMES */
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+@keyframes slideUp{to{opacity:1;transform:translateY(0)}}
+@keyframes scrollPulse{0%,100%{opacity:.4}50%{opacity:1}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes mapPulse{0%,100%{box-shadow:0 0 0 0 rgba(201,169,110,.4)}50%{box-shadow:0 0 0 16px rgba(201,169,110,0)}}
+
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+</style>
+</head>
+<body class="loading">
+
+<div id="pageLoader" aria-label="Učitavanje sajta">
+  <div>
+    <div class="loader-scissors" aria-hidden="true">
+      <div class="loader-handle"></div>
+    </div>
+    <div class="loader-text">Učitavanje</div>
+  </div>
+</div>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="mainNav" role="navigation" aria-label="Glavna navigacija">
+  <a href="#" class="nav-logo">Verica <span>M,V</span></a>
+  <ul class="nav-links" role="list">
+    <li><a href="#o-nama">O nama</a></li>
+    <li><a href="#usluge">Usluge</a></li>
+    <li><a href="#galerija">Galerija</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+  </ul>
+  <a href="tel:0604520111" class="nav-cta">Rezervišite</a>
+  <button class="hamburger" id="hamburger" aria-label="Otvori meni" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Meni">
+  <a href="#o-nama" class="mm-link">O nama</a>
+  <a href="#usluge" class="mm-link">Usluge</a>
+  <a href="#galerija" class="mm-link">Galerija</a>
+  <a href="#kontakt" class="mm-link">Kontakt</a>
+  <a href="tel:0604520111" class="mm-cta">060 4520 111</a>
+</div>
+
+<!-- HERO -->
+<header class="hero" id="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="hero-bg-img">
+      <img src="SLIKE/home-hero.jpg" alt="Žensko šišanje u frizerskom salonu" loading="eager" />
+    </div>
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Premium frizerski salon &nbsp;·&nbsp; Čačak</p>
+    <h1 class="hero-title">
+      <span class="line"><span>Salon</span></span>
+      <span class="line"><span><em>Verica</em></span></span>
+      <span class="line"><span>M,V</span></span>
+    </h1>
+    <p class="hero-sub">Svaki detalj govori o posvećenosti. Profesionalni tretmani, Inebrya preparati, rezultati koji traju.</p>
+    <div class="hero-actions">
+      <a href="tel:0604520111" class="btn-primary">Zakažite termin</a>
+      <a href="#usluge" class="btn-secondary">Pogledajte usluge <span>→</span></a>
+    </div>
+  </div>
+  <div class="scroll-indicator" aria-hidden="true">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</header>
+
+<!-- STRIP -->
+<div class="strip" aria-hidden="true">
+  <div class="strip-track">
+    <div class="strip-item"><span>Inebrya profesionalni preparati</span><div class="strip-dot"></div></div>
+    <div class="strip-item"><span>Šišanje &amp; Bojenje</span><div class="strip-dot"></div></div>
+    <div class="strip-item"><span>Balayage &amp; Ombre</span><div class="strip-dot"></div></div>
+    <div class="strip-item"><span>Keratinski tretman</span><div class="strip-dot"></div></div>
+    <div class="strip-item"><span>Trajna ondulacija</span><div class="strip-dot"></div></div>
+    <div class="strip-item"><span>Svečane frizure</span><div class="strip-dot"></div></div>
+    <div class="strip-item"><span>Sinđelićeva 47 · Čačak</span><div class="strip-dot"></div></div>
+    <div class="strip-item"><span>Inebrya profesionalni preparati</span><div class="strip-dot"></div></div>
+    <div class="strip-item"><span>Šišanje &amp; Bojenje</span><div class="strip-dot"></div></div>
+    <div class="strip-item"><span>Balayage &amp; Ombre</span><div class="strip-dot"></div></div>
+    <div class="strip-item"><span>Keratinski tretman</span><div class="strip-dot"></div></div>
+    <div class="strip-item"><span>Trajna ondulacija</span><div class="strip-dot"></div></div>
+    <div class="strip-item"><span>Svečane frizure</span><div class="strip-dot"></div></div>
+    <div class="strip-item"><span>Sinđelićeva 47 · Čačak</span><div class="strip-dot"></div></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="o-nama">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-people reveal">
+        <div class="person-card">
+          <div class="person-img">
+            <img src="SLIKE/owner-verica.jpg" alt="Verica - vlasnica salona" loading="lazy" />
+          </div>
+          <div>
+            <div class="person-name">Verica</div>
+            <div class="person-role">Vlasnica</div>
+          </div>
+          <p class="person-bio">Verica je dragoceno srce salona. Sa preko 15 godina rada u frizerstvu, vodi tim sa stilom, posvećenošću i jasno definisanim osećajem za detalj.</p>
+        </div>
+        <div class="person-card">
+          <div class="person-img">
+            <img src="SLIKE/milica-employee.jpg" alt="Milica - frizerska stilistkinja" loading="lazy" />
+          </div>
+          <div>
+            <div class="person-name">Milica</div>
+            <div class="person-role">Frizerska stilistkinja</div>
+          </div>
+          <p class="person-bio">Milica donosi svežu energiju u salon. Stručna je u šišanju i bojenju, i svaki klijent može očekivati top uslugu i pažljivo savetovanje.</p>
+        </div>
+      </div>
+      <div class="about-text">
+        <p class="section-label reveal reveal-delay-1">O nama</p>
+        <h2 class="section-title reveal reveal-delay-2">Umetnost frizerstva<br><em>u srcu Čačka</em></h2>
+        <div class="gold-divider reveal reveal-delay-2"></div>
+        <p class="reveal reveal-delay-3"><strong>Salon Verica M,V</strong> je vaše mesto za profesionalnu negu kose u Čačku. Kombinujemo godine iskustva sa najsavremenijim tehnikama i <strong>Inebrya profesionalnim preparatima</strong> iz Italije.</p>
+        <p class="reveal reveal-delay-4">Verica i Milica rade zajedno kako bi svaka frizura bila besprekorna. Ovde se pažnja posvećuje svakom klijentu i prirodnim rezultatima koji traju.</p>
+        <div class="about-stats reveal reveal-delay-5">
+          <div><div class="stat-num">10+</div><div class="stat-label">Godina iskustva</div></div>
+          <div><div class="stat-num">500+</div><div class="stat-label">Zadovoljnih klijenata</div></div>
+          <div><div class="stat-num">100%</div><div class="stat-label">Inebrya preparati</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="usluge" class="services-bg">
+  <div class="section-inner">
+    <div class="services-header">
+      <div>
+        <p class="section-label reveal">Usluge &amp; Cene</p>
+        <h2 class="section-title reveal reveal-delay-1">Cenovnik<br><em>tretmana</em></h2>
+      </div>
+      <p class="reveal reveal-delay-2">Cene su okvirne i mogu varirati<br>u zavisnosti od dužine i gustine kose.</p>
+    </div>
+    <div class="cat-tabs reveal" role="tablist">
+      <button class="cat-tab active" data-tab="zenski" role="tab" aria-selected="true" aria-controls="tab-zenski">Ženski salon</button>
+      <button class="cat-tab" data-tab="muski" role="tab" aria-selected="false" aria-controls="tab-muski">Muški salon</button>
+      <button class="cat-tab" data-tab="tretmani" role="tab" aria-selected="false" aria-controls="tab-tretmani">Tretmani kose</button>
+    </div>
+
+    <!-- ŽENSKI -->
+    <div class="price-panel active" id="tab-zenski" role="tabpanel">
+      <div class="price-cols">
+        <div>
+          <div class="price-group reveal">
+            <h3 class="price-group-title">Šišanje &amp; Oblikovanje</h3>
+            <div class="price-item"><span class="price-name">Šišanje<small>Bez feniranja</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">1.200 rsd</span></div>
+            <div class="price-item"><span class="price-name">Šišanje + feniranje<small>Kratka kosa</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">1.800 rsd</span></div>
+            <div class="price-item"><span class="price-name">Šišanje + feniranje<small>Srednja kosa</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">2.200 rsd</span></div>
+            <div class="price-item"><span class="price-name">Šišanje + feniranje<small>Duga kosa</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">2.800 rsd</span></div>
+          </div>
+          <div class="price-group reveal reveal-delay-1">
+            <h3 class="price-group-title">Feniranje &amp; Stilizovanje</h3>
+            <div class="price-item"><span class="price-name">Feniranje<small>Kratka kosa</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">900 rsd</span></div>
+            <div class="price-item"><span class="price-name">Feniranje<small>Srednja kosa</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">1.200 rsd</span></div>
+            <div class="price-item"><span class="price-name">Feniranje<small>Duga kosa</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">1.600 rsd</span></div>
+            <div class="price-item"><span class="price-name">Svečana frizura<small>Updo, punđa, pletenice</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">od 2.500 rsd</span></div>
+            <div class="price-item"><span class="price-name">Svečana frizura + proba<small>Za venčanja i proslave</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">od 4.500 rsd</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="price-group reveal reveal-delay-2">
+            <h3 class="price-group-title">Bojenje kose</h3>
+            <div class="price-item"><span class="price-name">Bojenje korena<small>Do 3 cm porasta</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">od 2.200 rsd</span></div>
+            <div class="price-item"><span class="price-name">Celo bojenje<small>Kratka kosa</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">od 2.800 rsd</span></div>
+            <div class="price-item"><span class="price-name">Celo bojenje<small>Srednja / duga kosa</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">od 3.500 rsd</span></div>
+            <div class="price-item"><span class="price-name">Pramenovi — folija<small>Delimično</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">od 3.500 rsd</span></div>
+            <div class="price-item"><span class="price-name">Pramenovi — folija<small>Celokupno</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">od 5.000 rsd</span></div>
+            <div class="price-item"><span class="price-name">Balayage / Ombre<small>Inebrya tehnika</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">od 6.500 rsd</span></div>
+            <div class="price-item"><span class="price-name">Toniranje<small>Nakon bojenja ili pramenova</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">od 1.500 rsd</span></div>
+          </div>
+          <div class="price-group reveal reveal-delay-3">
+            <h3 class="price-group-title">Hemijske obrade</h3>
+            <div class="price-item"><span class="price-name">Trajna ondulacija<small>Kratka kosa</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">od 2.800 rsd</span></div>
+            <div class="price-item"><span class="price-name">Trajna ondulacija<small>Srednja / duga kosa</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">od 3.800 rsd</span></div>
+            <div class="price-item"><span class="price-name">Keratinski tretman<small>Inebrya Ice Cream</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">od 6.500 rsd</span></div>
+          </div>
+          <p class="price-note reveal reveal-delay-4">* Konačna cena se određuje na osnovu dužine, gustine i stanja kose. Savetujemo konsultaciju pre tretmana.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- MUŠKI -->
+    <div class="price-panel" id="tab-muski" role="tabpanel">
+      <div class="price-cols">
+        <div>
+          <div class="price-group reveal">
+            <h3 class="price-group-title">Šišanje</h3>
+            <div class="price-item"><span class="price-name">Šišanje mašinom</span><span class="price-dots" aria-hidden="true"></span><span class="price-val">700 rsd</span></div>
+            <div class="price-item"><span class="price-name">Šišanje makazama<small>Klasično oblikovanje</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">900 rsd</span></div>
+            <div class="price-item"><span class="price-name">Šišanje + brijanje<small>Komplet usluga</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">1.300 rsd</span></div>
+            <div class="price-item"><span class="price-name">Šišanje + feniranje</span><span class="price-dots" aria-hidden="true"></span><span class="price-val">1.100 rsd</span></div>
+            <div class="price-item"><span class="price-name">Dečije šišanje<small>Do 12 godina</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">600 rsd</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="price-group reveal reveal-delay-1">
+            <h3 class="price-group-title">Brijanje &amp; Brada</h3>
+            <div class="price-item"><span class="price-name">Brijanje<small>Ravnom britvom</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">600 rsd</span></div>
+            <div class="price-item"><span class="price-name">Uređivanje brade<small>Oblikovanje i trimovanje</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">500 rsd</span></div>
+            <div class="price-item"><span class="price-name">Brada + hot towel<small>Opuštajući tretman</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">800 rsd</span></div>
+          </div>
+          <div class="price-group reveal reveal-delay-2">
+            <h3 class="price-group-title">Bojenje — muško</h3>
+            <div class="price-item"><span class="price-name">Bojenje kose</span><span class="price-dots" aria-hidden="true"></span><span class="price-val">od 1.800 rsd</span></div>
+            <div class="price-item"><span class="price-name">Bojenje brade</span><span class="price-dots" aria-hidden="true"></span><span class="price-val">od 600 rsd</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRETMANI -->
+    <div class="price-panel" id="tab-tretmani" role="tabpanel">
+      <div class="price-cols">
+        <div>
+          <div class="price-group reveal">
+            <h3 class="price-group-title">Inebrya Ice Cream tretmani</h3>
+            <div class="price-item"><span class="price-name">Hidratantna maska<small>Za suvu i oštećenu kosu</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">700 rsd</span></div>
+            <div class="price-item"><span class="price-name">Ampula — regeneracija<small>Intenzivna nega u jednom tretmanu</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">900 rsd</span></div>
+            <div class="price-item"><span class="price-name">Keratinska maska<small>Posle hemijske obrade</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">1.200 rsd</span></div>
+            <div class="price-item"><span class="price-name">Tretman za vlasište<small>Serum + opuštajuća masaža</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">1.400 rsd</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="price-group reveal reveal-delay-1">
+            <h3 class="price-group-title">Paketi duboke nege</h3>
+            <div class="price-item"><span class="price-name">Dubinska hidratacija<small>Maska + ampula + šampon</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">1.800 rsd</span></div>
+            <div class="price-item"><span class="price-name">Regeneracija posle boje<small>Kompletni tretman obnove</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">2.000 rsd</span></div>
+            <div class="price-item"><span class="price-name">Anti-frizz tretman<small>Glačanje bez hemikalija</small></span><span class="price-dots" aria-hidden="true"></span><span class="price-val">od 3.000 rsd</span></div>
+          </div>
+          <p class="price-note reveal reveal-delay-2">Svi tretmani izvode se isključivo sa Inebrya Ice Cream profesionalnom linijom. Preporučujemo seriju od 3 tretmana za optimalne rezultate.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="galerija">
+  <div class="section-inner">
+    <div class="services-header">
+      <div>
+        <p class="section-label reveal">Portfolio</p>
+        <h2 class="section-title reveal reveal-delay-1">Naši <em>radovi</em></h2>
+      </div>
+      <p class="reveal reveal-delay-2">Pratite nas na Facebooku<br>za najnovije radove.</p>
+    </div>
+    <div class="gallery-grid reveal reveal-delay-1" aria-label="Galerija frizura">
+      <div class="gallery-item"><img src="SLIKE/182337936_3743903819041413_601794888369249069_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/182454983_3743898432375285_8432020652222477633_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/182692737_3743903732374755_2905749028068238353_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/182701257_3743898222375306_7283912712189775227_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/470645954_8601396896625390_6048671141746842018_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/470667309_8601397039958709_7065998939374992540_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/470682611_8601396903292056_3324596906159802024_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/471121892_8601396876625392_6398282041278450806_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/471156869_8601396953292051_5271422195555920071_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/471291540_8645733918858354_6333354409001111148_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/471418615_8645733985525014_6202228371202690688_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/471419791_8645733982191681_1691082529929034541_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/471433054_8645733658858380_9204190681447870611_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/471433648_8645734028858343_169319072874924357_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/471446028_8645733945525018_8031271416678114386_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/471494561_8645733915525021_202099924172287735_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/471502938_8645733958858350_3683408244021808160_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/471594627_8645734005525012_5403946459288412878_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/471600415_8645733858858360_4784285391446324523_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/472080747_8683079581790454_1014887035100788122_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/472161541_8687917951306617_7548513570285260043_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/472163476_8683079615123784_576081719546554734_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/472165599_8683079668457112_2516618064038115996_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/472182951_8683079831790429_3616921393090238274_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/472200754_8687917974639948_1838029309073991530_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/472229962_8683079741790438_4562165493626716251_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/472272350_8687918177973261_4279513933354864678_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/472292225_8683079808457098_4415762370149286734_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/472382847_8683079641790448_7883690829657786075_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/472405174_8683079815123764_5910809499794544255_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/472430974_8687918304639915_7606430672435514005_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/472436448_8683079688457110_5911139788525091648_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/472501374_8687918101306602_2221404083337339247_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/472704233_8687917857973293_4599270395777431980_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/472718245_8687918274639918_5159664480622530467_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/473830391_8764366130328465_6111415312677031833_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/473890999_8759112434187168_3166726245397509753_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/473896163_8759112240853854_2551088786345674897_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/474008410_8759112254187186_2332406954375037259_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/474024474_8764366383661773_1636564543550916080_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/474066400_8764366063661805_2047718432448260216_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/474095957_8759112560853822_3327140085616909234_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/474571318_1180132927454658_8518439444754121415_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/474698259_1180132827454668_5297979638191704559_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/474706319_1180132774121340_6861666372223996049_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/474734033_1180132660788018_7039792494061149208_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/476836798_8883544045077339_7477064110060160815_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/476902737_8883544328410644_5562569743852321940_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/476929929_8883544038410673_8464642434417608886_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/484220684_9085659024865839_2314869481525047118_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/484994324_9085659061532502_1880294462488819444_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/490786840_1251564353644848_6094134299496316078_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/490999467_1251564336978183_4669511153118680491_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/491048513_1251564316978185_3788627536371404945_n.jpg" alt="Rad frizera" loading="lazy"></div>
+      <div class="gallery-item"><img src="SLIKE/498608443_1280230047444945_5276084794476197358_n.jpg" alt="Rad frizera" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="brands-section" aria-label="Kozmetika koju koristimo">
+  <div class="section-inner">
+    <p class="section-label reveal">Kozmetika koju koristimo</p>
+    <h2 class="section-title reveal reveal-delay-1">Premium <em>kozmetički proizvodi</em></h2>
+    <div class="brand-grid reveal reveal-delay-2">
+      <div class="brand-card">Kérastase</div>
+      <div class="brand-card">L'Oréal Professionnel</div>
+      <div class="brand-card">Schwarzkopf Professional</div>
+      <div class="brand-card">Wella Professionals</div>
+      <div class="brand-card">Redken</div>
+      <div class="brand-card">Matrix</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="kontakt" class="contact-bg">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div>
+        <p class="section-label reveal">Dođite kod nas</p>
+        <h2 class="section-title reveal reveal-delay-1">Kontakt &amp;<br><em>lokacija</em></h2>
+        <div class="gold-divider reveal reveal-delay-1"></div>
+        <div class="contact-info-list">
+          <div class="contact-info-item reveal reveal-delay-2">
+            <div class="ci-icon" aria-hidden="true">☎</div>
+            <div><div class="ci-label">Telefon</div><div class="ci-value"><a href="tel:0604520111">060 4520 111</a></div></div>
+          </div>
+          <div class="contact-info-item reveal reveal-delay-3">
+            <div class="ci-icon" aria-hidden="true">✦</div>
+            <div><div class="ci-label">Adresa</div><div class="ci-value">Sinđelićeva br. 47<br>Čačak, 32000, Srbija</div></div>
+          </div>
+          <div class="contact-info-item reveal reveal-delay-4">
+            <div class="ci-icon" aria-hidden="true">◈</div>
+            <div>
+              <div class="ci-label">Radno vreme</div>
+              <div class="ci-value">
+                <div class="hours-grid">
+                  <div class="hour-row today"><span class="hour-day">Pon — Pet</span><span class="hour-time">08:00 – 20:00</span></div>
+                  <div class="hour-row"><span class="hour-day">Subota</span><span class="hour-time">08:00 – 16:00</span></div>
+                  <div class="hour-row"><span class="hour-day">Nedelja</span><span class="hour-time">Zatvoreno</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="map-placeholder" role="img" aria-label="Mapa — Sinđelićeva 47, Čačak">
+          <div class="map-pin" aria-hidden="true">✦</div>
+          <span>Sinđelićeva br. 47, Čačak</span>
+          <a href="https://www.google.com/maps/search/Sinđelićeva+47+Čačak+Serbia" target="_blank" rel="noopener noreferrer">Otvori na mapi →</a>
+        </div>
+        <div style="margin-top:16px">
+          <a href="tel:0604520111" class="btn-primary" style="display:block;text-align:center;padding:18px">Pozovite za rezervaciju</a>
+        </div>
+        <div style="margin-top:10px;padding:16px 20px;background:var(--dark-card);border:1px solid var(--dark-line)">
+          <p style="font-size:.75rem;color:var(--text-muted);line-height:1.7;letter-spacing:.04em">Za grupne rezervacije i svečane prigode preporučujemo najavu <strong style="color:var(--gold-light);font-weight:400">najmanje 3 dana unapred</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer role="contentinfo">
+  <div class="footer-logo">Salon Verica <span style="color:var(--text-muted);font-weight:300">M,V</span></div>
+  <p class="footer-copy">© 2025 Salon Verica M,V · Čačak · Sva prava zadržana</p>
+  <div class="footer-social" aria-label="Društvene mreže">
+    <a href="https://www.facebook.com/profile.php?id=100063738841007" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
+  </div>
+</footer>
+
+<!-- MOBILE FLOAT CTA -->
+<a href="tel:0604520111" class="float-cta" id="floatCta" aria-label="Zakažite termin">Zakažite → 060 4520 111</a>
+
+<script>
+(function(){
+  // CURSOR
+  var dot=document.getElementById('cursorDot'),ring=document.getElementById('cursorRing');
+  if(dot&&ring){
+    var mx=0,my=0,rx=0,ry=0;
+    document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
+    (function anim(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(anim)})();
+    document.querySelectorAll('a,button,.price-item').forEach(function(el){
+      el.addEventListener('mouseenter',function(){ring.style.width='56px';ring.style.height='56px'});
+      el.addEventListener('mouseleave',function(){ring.style.width='36px';ring.style.height='36px'});
+    });
+  }
+
+  // NAV SCROLL
+  var nav=document.getElementById('mainNav'),floatCta=document.getElementById('floatCta'),pageLoader=document.getElementById('pageLoader');
+  window.addEventListener('scroll',function(){
+    if(window.scrollY>60){nav.classList.add('scrolled');if(floatCta)floatCta.classList.add('visible')}
+    else{nav.classList.remove('scrolled');if(floatCta)floatCta.classList.remove('visible')}
+  },{passive:true});
+  window.addEventListener('load',function(){document.body.classList.remove('loading');if(pageLoader){pageLoader.classList.add('loader-hidden');setTimeout(function(){pageLoader.style.display='none'},3000)}});
+
+  // HAMBURGER
+  var btn=document.getElementById('hamburger'),menu=document.getElementById('mobileMenu'),open=false;
+  if(btn&&menu){
+    function toggle(){
+      open=!open;btn.classList.toggle('open',open);btn.setAttribute('aria-expanded',open);
+      if(open){menu.style.display='flex';requestAnimationFrame(function(){menu.classList.add('open');document.body.style.overflow='hidden'})}
+      else{menu.classList.remove('open');document.body.style.overflow='';setTimeout(function(){menu.style.display='none'},350)}
+    }
+    btn.addEventListener('click',toggle);
+    menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){if(open)toggle()})});
+  }
+
+  // REVEAL
+  var els=document.querySelectorAll('.reveal');
+  if(els.length&&window.IntersectionObserver){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}});
+    },{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+    els.forEach(function(el){io.observe(el)});
+  } else {
+    els.forEach(function(el){el.classList.add('visible')});
+  }
+
+  // PRICE TABS
+  document.querySelectorAll('.cat-tab').forEach(function(tab){
+    tab.addEventListener('click',function(){
+      var target=tab.getAttribute('data-tab');
+      document.querySelectorAll('.cat-tab').forEach(function(t){t.classList.remove('active');t.setAttribute('aria-selected','false')});
+      document.querySelectorAll('.price-panel').forEach(function(p){p.classList.remove('active')});
+      tab.classList.add('active');tab.setAttribute('aria-selected','true');
+      var panel=document.getElementById('tab-'+target);
+      if(panel){panel.classList.add('active');panel.querySelectorAll('.reveal:not(.visible)').forEach(function(el){el.classList.add('visible')})}
+    });
+  });
+
+  // SMOOTH SCROLL
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var id=a.getAttribute('href');if(id==='#')return;
+      var el=document.querySelector(id);
+      if(el){e.preventDefault();var top=el.getBoundingClientRect().top+window.scrollY-60;window.scrollTo({top:top,behavior:'smooth'})}
+    });
+  });
+})();
+</script>
+</body>
+</html>
