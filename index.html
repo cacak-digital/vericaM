@@ -490,7 +490,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
       </div>
       <p class="reveal reveal-delay-2">Pratite nas na Facebooku<br>za najnovije radove.</p>
     </div>
-    <div class="gallery-grid reveal reveal-delay-1" aria-label="Galerija frizura">
+    <div class="gallery-grid" aria-label="Galerija frizura">
       <div class="gallery-item"><img src="SLIKE/182337936_3743903819041413_601794888369249069_n.jpg" alt="Rad frizera" loading="lazy"></div>
       <div class="gallery-item"><img src="SLIKE/182454983_3743898432375285_8432020652222477633_n.jpg" alt="Rad frizera" loading="lazy"></div>
       <div class="gallery-item"><img src="SLIKE/182692737_3743903732374755_2905749028068238353_n.jpg" alt="Rad frizera" loading="lazy"></div>
@@ -663,7 +663,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
   if(els.length&&window.IntersectionObserver){
     var io=new IntersectionObserver(function(entries){
       entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}});
-    },{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+    },{threshold:.05,rootMargin:'0px 0px 0px 0px'});
     els.forEach(function(el){io.observe(el)});
   } else {
     els.forEach(function(el){el.classList.add('visible')});
